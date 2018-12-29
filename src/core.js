@@ -653,7 +653,12 @@ $.extend( $.validator, {
 					return false;
 				}
 
-				rulesCache[ name ] = true;
+				// Cache only "checkable" elements (checkbox|radio).
+				// This allows us to validate multiple inputs with the same name.
+				if ( validator.checkable( this ) ) {
+					rulesCache[ name ] = true;
+                }
+
 				return true;
 			} );
 		},
